@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { NavLink, useLocation } from 'react-router'
+import { useState, type MouseEvent } from 'react'
+import { NavLink } from 'react-router'
 import { ArrowRight, LayoutDashboard, LogOut, Menu, X } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { ButtonLink } from '@/components/ui/Button'
@@ -19,12 +19,11 @@ const links = [
 export function Navbar() {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
 
-  useEffect(() => {
-    // close the mobile menu when navigating
-    setOpen(false)
-  }, [pathname])
+  // close the mobile menu as soon as any link inside it is followed
+  const closeOnNavigate = (e: MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false)
+  }
 
   const navClass = ({ isActive }: { isActive: boolean }) =>
     cx(
@@ -82,7 +81,7 @@ export function Navbar() {
 
       {open && (
         <div className="border-t border-slate-200 bg-white lg:hidden animate-fade-up">
-          <nav className="container-x flex flex-col py-3" aria-label="Mobile">
+          <nav className="container-x flex flex-col py-3" aria-label="Mobile" onClick={closeOnNavigate}>
             {links.map((l) => (
               <NavLink key={l.to} to={l.to} className={({ isActive }) => cx('rounded-lg px-3 py-2.5 text-base font-semibold', isActive ? 'bg-navy-50 text-navy-900' : 'text-slate-700')}>
                 {l.label}
@@ -101,7 +100,7 @@ export function Navbar() {
                   <ButtonLink to={homeFor(user.role)} variant="primary">
                     <LayoutDashboard className="size-4" /> {user.role === 'admin' ? 'Admin panel' : 'My dashboard'}
                   </ButtonLink>
-                  <button onClick={logout} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50">
+                  <button onClick={() => { setOpen(false); logout() }} className="inline-flex h-11 items-center justify-center gap-2 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50">
                     <LogOut className="size-4" /> Log out
                   </button>
                 </>

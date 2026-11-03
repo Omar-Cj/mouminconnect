@@ -1,7 +1,7 @@
 import { CheckCircle2, ShieldAlert } from 'lucide-react'
 import villa2 from '@/assets/brand/villa-2.jpg'
 
-export const COMMITMENTS = [
+const COMMITMENTS = [
   'Transparency in our role and in any service fees.',
   'No false promises regarding price, quality or construction time.',
   'We share available company information and encourage you to check references and past projects yourself.',

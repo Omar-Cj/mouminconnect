@@ -36,7 +36,7 @@ export function Badge({ tone = 'slate', dot = false, className, children }: { to
   )
 }
 
-export const STATUS_TONE: Record<InquiryStatus, Tone> = {
+const STATUS_TONE: Record<InquiryStatus, Tone> = {
   submitted: 'blue',
   under_review: 'amber',
   matched: 'navy',

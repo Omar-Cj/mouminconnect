@@ -6,7 +6,7 @@ This repository is the **client-side MVP**: there is no backend or database yet.
 
 ## Stack
 
-- React 19 + TypeScript 7 + Vite 8
+- React 19 + TypeScript 6 + Vite 8
 - React Router 8 (declarative mode)
 - Tailwind CSS 4 with the brand theme (navy `#0f2b5b`, gold `#c9a227`, Montserrat + Inter)
 - lucide-react icons
@@ -15,10 +15,13 @@ This repository is the **client-side MVP**: there is no backend or database yet.
 ## Run it
 
 ```bash
-npm install --legacy-peer-deps   # the scaffold's typescript-eslint peer range predates TS 7
-npm run dev                      # http://localhost:5173
-npm run build                    # typecheck + production build into dist/
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # typecheck (tsc -b) + production build into dist/
+npm run lint
 ```
+
+Node 20.19+ or 22.12+ is required (Vite 8). A `.nvmrc` pins Node 22.
 
 ## Demo accounts
 
@@ -66,6 +69,8 @@ All state is under `localStorage` keys prefixed `mbc:v1:`. Passwords are SHA-256
 4. Company self-service portal (companies respond to matches, upload portfolios).
 5. Reviews and ratings after completion.
 
-## Known issue
+## Deploying to Netlify
 
-`npm run lint` fails in the scaffold because `typescript-eslint` does not yet support TypeScript 7.0. Pin `typescript` to `~6.0` or wait for `typescript-eslint` support for TS ≥ 7.1.
+`netlify.toml` configures the build (`npm run build` → `dist/`), pins Node 22 and adds the single-page-app redirect so React Router routes such as `/app/inquiries/123` load directly. No extra Netlify UI settings or install flags are needed.
+
+TypeScript is pinned to `~6.0.3`: it is the newest release that `typescript-eslint` supports (`<6.1`) and it understands every option in the tsconfig files. Do not downgrade below 5.8 (`erasableSyntaxOnly` is unknown there) and do not move to TypeScript 7 until `typescript-eslint` supports it.

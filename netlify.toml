@@ -1,0 +1,15 @@
+# Netlify build configuration for Mumin Build Connect (Vite + React SPA)
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Vite 8 and @vitejs/plugin-react 6 require Node ^20.19 || >=22.12
+  NODE_VERSION = "22"
+
+# Single-page app: let React Router handle every route (e.g. /app/inquiries/123)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

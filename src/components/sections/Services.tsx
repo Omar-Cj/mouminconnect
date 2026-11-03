@@ -1,6 +1,6 @@
 import { CalendarCheck, ClipboardList, Handshake, MessagesSquare, Scale } from 'lucide-react'
 
-export const SERVICES = [
+const SERVICES = [
   { icon: Handshake, title: 'Connecting you with construction companies', text: 'We introduce you only to companies we have checked, whose services match your project.' },
   { icon: ClipboardList, title: 'Collecting your requirements', text: 'Location, type of building, budget and preferred timeline, captured once and shared accurately with every company.' },
   { icon: CalendarCheck, title: 'Coordinating meetings and assessments', text: 'We arrange the first meeting and the site assessment so you get an evaluation, cost estimate and technical details.' },

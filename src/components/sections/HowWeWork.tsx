@@ -1,7 +1,7 @@
 import planning from '@/assets/brand/planning.jpg'
 import { cx } from '@/lib/format'
 
-export const STEPS = [
+const STEPS = [
   { title: 'Understanding the needs', so: 'Fahamka baahida', text: 'We register what you want to build: the location, your budget and the type of project.' },
   { title: 'Selecting suitable companies', so: 'Xulashada shirkadda', text: 'We share suitable companies with you, considering their services, capacity and track record.' },
   { title: 'Meeting and assessment', so: 'Kulanka iyo qiimaynta', text: 'The company evaluates the site and provides a cost estimate and the technical details.' },

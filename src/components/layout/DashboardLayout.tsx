@@ -1,5 +1,5 @@
-import { useEffect, useState, type ReactNode } from 'react'
-import { Link, NavLink, Outlet, useLocation } from 'react-router'
+import { useState, type MouseEvent, type ReactNode } from 'react'
+import { Link, NavLink, Outlet } from 'react-router'
 import { Globe, LogOut, Menu, X, type LucideIcon } from 'lucide-react'
 import { Logo } from '@/components/brand/Logo'
 import { Avatar } from '@/components/ui/Misc'
@@ -22,11 +22,11 @@ interface Props {
 export function DashboardLayout({ nav, areaLabel, footer }: Props) {
   const { user, logout } = useAuth()
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
 
-  useEffect(() => {
-    setOpen(false)
-  }, [pathname])
+  // close the mobile drawer as soon as any link inside it is followed
+  const closeOnNavigate = (e: MouseEvent<HTMLElement>) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false)
+  }
 
   const items = (
     <ul className="space-y-1">
@@ -66,7 +66,7 @@ export function DashboardLayout({ nav, areaLabel, footer }: Props) {
   )
 
   const sidebar = (
-    <div className="flex h-full flex-col">
+    <div className="flex h-full flex-col" onClick={closeOnNavigate}>
       <div className="flex items-center justify-between px-4 py-5">
         <Logo tone="dark" />
         <button className="rounded-lg p-1.5 text-slate-300 hover:bg-white/10 lg:hidden" onClick={() => setOpen(false)} aria-label="Close menu">
